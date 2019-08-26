@@ -20,19 +20,22 @@
             <h2>A faire</h2>
             <div id="dolist">
                 <ul>
+                    <!--? Affichage des taches non archivés -->
                     <?php 
                         foreach ($todolist as $element) {
                             if ($element->archived == false){
-                                $check = ($element->check) ? "☑" : "☐";
-                                echo "<li>".$check." ".$element->task."</li>";
+                                $check = ($element->check) ? "checked" : "unchecked";
+                                echo "<li data-id='".$element->id."' class='todo-item element-".$check."'>".$element->task."</li>";
                             }
                         }
                     ?>
+
                 </ul>
             </div>
             <h2>Archive</h2>
             <div id="doarchive">
                 <ul>
+                    <!--? Affichage des tâches archivés -->
                      <?php 
                         foreach ($todolist as $element) {
                             if ($element->archived == true){
@@ -41,16 +44,19 @@
                             }
                         }
                     ?>
+
                 </ul>
             </div>
         </div>
     </div>
     <div class="wrapper">
         <h2>Ajouter une tâche</h2>
-        <form action="form.php" method="post">
+        <form action="#" method="post">
             <input type="text" name="newtask" id="newtask">
-            <button type="submit">Ajouter</button>
+            <button type="submit" id='submit'>Ajouter</button>
         </form>
     </div>
+
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
