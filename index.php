@@ -1,7 +1,16 @@
 <?php
-    $file = 'assets/todo.json';
-    $data = file_get_contents($file);
-    $todolist = json_decode($data);
+    function generateItems($archived){
+        $file = 'assets/todo.json';
+        $data = file_get_contents($file);
+        $todolist = json_decode($data);
+
+        foreach ($todolist as $element) {
+            if ($element->archived == $archived){
+                $check = ($element->check) ? "checked" : "unchecked";
+                echo "<li data-id='".$element->id."' class='todo-item element-".$check."'>".$element->task."</li>";
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +30,7 @@
             <div id="dolist">
                 <ul>
                     <!--? Affichage des taches non archivés -->
-                    <?php 
-                        foreach ($todolist as $element) {
-                            if ($element->archived == false){
-                                $check = ($element->check) ? "checked" : "unchecked";
-                                echo "<li data-id='".$element->id."' class='todo-item element-".$check."'>".$element->task."</li>";
-                            }
-                        }
-                    ?>
+                    <?php generateItems(false) ?>
 
                 </ul>
             </div>
@@ -36,14 +38,7 @@
             <div id="doarchive">
                 <ul>
                     <!--? Affichage des tâches archivés -->
-                     <?php 
-                        foreach ($todolist as $element) {
-                            if ($element->archived == true){
-                                $check = ($element->check) ? "☑" : "☐";
-                                echo "<li>".$check." ".$element->task."</li>";
-                            }
-                        }
-                    ?>
+                     <?php generateItems(true) ?>
 
                 </ul>
             </div>
@@ -55,6 +50,10 @@
             <input type="text" name="newtask" id="newtask">
             <button type="submit" id='submit'>Ajouter</button>
         </form>
+    </div>
+
+    <div class="wrapper">
+        <div id="response"></div>
     </div>
 
     <script src="assets/js/main.js"></script>

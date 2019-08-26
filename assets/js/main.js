@@ -11,24 +11,27 @@ const submit = document.getElementById('submit');
 submit.addEventListener('click', e => {
     e.preventDefault()
 
+    const input = document.getElementById('newtask').value
+    const data = {
+        'task': input,
+        'check': false,
+        'archived': false
+    }
+    
+
     const req = new XMLHttpRequest();
 
-    req.open('get', 'assets/todo.json', true);
+    req.open('POST', 'form.php', true);
 
-    req.send();
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    req.send('data='+JSON.stringify(data));
 
     req.onreadystatechange = () => {
-        if(req.readyState === XMLHttpRequest.DONE){
-            if(req.status == 200){
-                let data = req.response;    // On stocke les données récupérés dans une variable
-                data = JSON.parse(data);     // On convertis son texte brut en véritable données JSON
-                console.log({data})
-            }
-        } else {
-            console.error(`Erreur ${req.status}`)
+        if (req.readyState == XMLHttpRequest.DONE) {
+            document.getElementById('response').innerHTML = req.responseText;
         }
-        
-    }     
+    }
 })
 
 function checkItem (e) {
