@@ -1,6 +1,6 @@
 <?php
     // Fonction de génération des tâches stockés dans le fichier todo.json
-    function generateItems($archived){
+    function generateItems($checked){
         // Chargement du fichier et décodage de son contenu
         $file = 'assets/todo.json';
         $data = file_get_contents($file);
@@ -8,7 +8,7 @@
 
         // Pour chaque élément du json
         foreach ($todolist->items as $element) {
-            if ($element->archived == $archived){
+            if ($element->check == $checked){
                 // Vérifier si il est à l'état coché et définir le nom de la classe on fonction de celui-ci
                 $check = ($element->check) ? "checked" : "unchecked";
                 // Création de l'élément li
@@ -38,6 +38,7 @@
                     <?php generateItems(false) ?>
 
                 </ul>
+                <button id="save">Enregistrer</button>
             </div>
             <h2>Archive</h2>
             <div id="doarchive">

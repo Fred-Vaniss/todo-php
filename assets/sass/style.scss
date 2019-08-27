@@ -42,10 +42,18 @@ ul{
     }
 }
 
-.element-checked:before{
-    content: "☑ ";
+.element-checked{
+    color: #c0c0c0; 
+    &:before{
+        content: "☑ ";
+    }
+
+    #doarchive &{
+        text-decoration: line-through;
+    }
 }
 
 .element-unchecked:before{
     content: "☐ ";
 }
+

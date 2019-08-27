@@ -24,8 +24,7 @@ function addItem (e) {
     const data = {
         'id': 0,
         'task': input.value,
-        'check': false,
-        'archived': false
+        'check': false
     }
     
     // Création de la requête
@@ -42,13 +41,13 @@ function addItem (e) {
         if (req.readyState == XMLHttpRequest.DONE) {
             let doList = document.getElementById('dolist').getElementsByTagName('ul')[0] //La balise UL de la page
 
-            // Stockage de la réponse envoyé par form.php
+            // Stockage et décodage de la réponse envoyé par form.php
             let response = JSON.parse(req.responseText);  
             
             // Création de l'élément li et ajout dans notre page 
             let newItem = document.createElement('li')
-            newItem.className = 'todo-item  element-unchecked'
             newItem.dataset.id = response.id
+            newItem.className = 'todo-item  element-unchecked'
             newItem.innerHTML = response.task
             newItem.addEventListener('click', checkItem)
 
@@ -62,9 +61,8 @@ function addItem (e) {
 
 // Fonction de changement de style de l'état coché/décoché
 function checkItem (e) {
-    let classList = e
-        e.target.classList.toggle('element-checked')
-        e.target.classList.toggle('element-unchecked')
+    e.target.classList.toggle('element-checked')
+    e.target.classList.toggle('element-unchecked')
 
     console.log(e.target.classList.contains('element-checked'))
 }

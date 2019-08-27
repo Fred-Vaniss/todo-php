@@ -40,8 +40,16 @@ ul {
   font-size: 1.2em;
 }
 
+.element-checked {
+  color: #c0c0c0;
+}
+
 .element-checked:before {
   content: "☑ ";
+}
+
+#doarchive .element-checked {
+  text-decoration: line-through;
 }
 
 .element-unchecked:before {
