@@ -8,12 +8,15 @@ for (const item of todoItems) {
 
 const submit = document.getElementById('submit');
 
-submit.addEventListener('click', e => {
+submit.addEventListener('click', addItem)
+
+function addItem (e) {
     e.preventDefault()
 
-    const input = document.getElementById('newtask').value
+    let input = document.getElementById('newtask')
     const data = {
-        'task': input,
+        'id': 0,
+        'task': input.value,
         'check': false,
         'archived': false
     }
@@ -29,10 +32,20 @@ submit.addEventListener('click', e => {
 
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE) {
-            document.getElementById('response').innerHTML = req.responseText;
+            let doList = document.getElementById('dolist').getElementsByTagName('ul')[0]
+
+            let response = JSON.parse(req.responseText);
+            let newItem = document.createElement('li')
+            newItem.className = 'todo-item  element-unchecked'
+            newItem.dataset.id = response.id
+            newItem.innerHTML = response.task
+
+            doList.appendChild(newItem)
+
+            input.value = ''
         }
     }
-})
+}
 
 function checkItem (e) {
     let classList = e

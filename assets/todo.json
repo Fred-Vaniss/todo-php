@@ -1,32 +1,29 @@
-[
-    {
-        "id": 1,
-        "task": "Faire ceci",
-        "check": false,
-        "archived": false
-    }, 
-    {
-        "id": 2,
-        "task": "Faire cela",
-        "check": true,
-        "archived": true
-    }, 
-    {
-        "id": 3,
-        "task": "Faire des choses divers et vari\u00e9s",
-        "check": false,
-        "archived": false
-    }, 
-    {
-        "id": 4,
-        "task": "Faire quelque chose",
-        "check": true,
-        "archived": false
-    }, 
-    {
-        "id": 5,
-        "task": "Faire ce que je veux",
-        "check": false,
-        "archived": false
-    }
-]
+{
+    "increment": 5,
+    "items": [
+        {
+            "id": 1,
+            "task": "Faire ceci",
+            "check": false,
+            "archived": false
+        },
+        {
+            "id": 2,
+            "task": "Faire cela",
+            "check": true,
+            "archived": true
+        },
+        {
+            "id": 3,
+            "task": "Faire des choses divers et vari\u00e9s",
+            "check": false,
+            "archived": false
+        },
+        {
+            "id": 4,
+            "task": "Faire quelque chose",
+            "check": false,
+            "archived": false
+        }
+    ]
+}

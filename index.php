@@ -4,7 +4,7 @@
         $data = file_get_contents($file);
         $todolist = json_decode($data);
 
-        foreach ($todolist as $element) {
+        foreach ($todolist->items as $element) {
             if ($element->archived == $archived){
                 $check = ($element->check) ? "checked" : "unchecked";
                 echo "<li data-id='".$element->id."' class='todo-item element-".$check."'>".$element->task."</li>";
