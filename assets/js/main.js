@@ -59,10 +59,64 @@ function addItem (e) {
     }
 }
 
-// Fonction de changement de style de l'état coché/décoché
-function checkItem (e) {
-    e.target.classList.toggle('element-checked')
-    e.target.classList.toggle('element-unchecked')
 
-    console.log(e.target.classList.contains('element-checked'))
+
+//*
+//* Cocher/décocher les éléments
+//*////////////////////////////////
+
+// Variable qui va stocker les éléments modifiés avant d'envoyer au php
+let modifications = [];
+
+// Fonction de cocher/décocher un élément
+function checkItem (e) {
+    // Varialbe qui indiquera si il a trouvé un élément ou pas
+    let found = false
+
+    // Changement du style
+    e.target.classList.toggle('element-checked');
+    e.target.classList.toggle('element-unchecked');
+
+    // Si aucun élément modifié, alors il ajout d'office l'élément
+    if (modifications.length === 0){
+        addNewElement(e)
+    
+    // Sinon il va chercher dans le tableau
+    } else {
+        for(let i = 0; i < modifications.length; i++) {
+            // Si il trouve un élément qui correspond, il stocke dans la variable "found" l'indexe où il se trouve dans le tableau
+            if(modifications[i].id === e.target.dataset.id){
+                found = i;
+                break;
+            }
+        }
+
+        // Si rien n'a été trouvé, alors il ajoute un nouvel élément au tableau
+        if (found === false){
+            addNewElement(e);
+
+        // Si il a été trouvé, alors il supprime l'élément à l'indexe du tableau où il se trouve
+        } else {
+            modifications.splice(found,1);
+        }
+    }
+
+    console.table(modifications)
 }
+
+// Ajout d'un élément
+function addNewElement (e) {
+    // Il crée un objet avec l'ID et l'état coché ou pas
+    let target = {
+        "id": e.target.dataset.id,
+        "check": e.target.classList.contains('element-checked') ? true : false
+    }
+
+    // Il push l'objet dans le tableau des éléments modifiés
+    modifications.push(target)
+}
+
+// Envoie des modifications au PHP pour traiter les modifications
+document.getElementById('save').addEventListener('click', () => {
+    const req = new XMLHttpRequest
+})
