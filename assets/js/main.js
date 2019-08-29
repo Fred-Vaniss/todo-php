@@ -118,5 +118,19 @@ function addNewElement (e) {
 
 // Envoie des modifications au PHP pour traiter les modifications
 document.getElementById('save').addEventListener('click', () => {
-    const req = new XMLHttpRequest
+    const req = new XMLHttpRequest();
+
+    req.open('POST', 'edit.php', true);
+
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    req.send('modifs='+JSON.stringify(modifications))
+
+    console.log("enregistrer")
+
+    req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE){
+            location.reload()
+        }
+    }
 })

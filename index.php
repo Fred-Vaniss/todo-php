@@ -38,7 +38,6 @@
                     <?php generateItems(false) ?>
 
                 </ul>
-                <button id="save">Enregistrer</button>
             </div>
             <h2>Archive</h2>
             <div id="doarchive">
@@ -48,6 +47,7 @@
 
                 </ul>
             </div>
+            <button type="submit" id="save">Enregistrer</button>
         </div>
     </div>
     <div class="wrapper">
