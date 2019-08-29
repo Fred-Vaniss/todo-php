@@ -33,7 +33,7 @@
         <div id="todo">
             <h2>A faire</h2>
             <div id="dolist">
-                <ul>
+                <ul id="drag-dolist">
                     <!--//? Affichage des taches non archivés -->
                     <?php generateItems(false) ?>
 
@@ -41,7 +41,7 @@
             </div>
             <h2>Archive</h2>
             <div id="doarchive">
-                <ul>
+                <ul id="drag-archive">
                     <!--//? Affichage des tâches archivés -->
                      <?php generateItems(true) ?>
 
@@ -62,6 +62,7 @@
         <div id="response"></div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
