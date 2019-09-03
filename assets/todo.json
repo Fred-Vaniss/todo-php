@@ -1,25 +1,4 @@
 {
     "increment": 5,
-    "items": [
-        {
-            "id": 1,
-            "task": "Faire ceci",
-            "check": false
-        },
-        {
-            "id": 2,
-            "task": "Faire cela",
-            "check": true
-        },
-        {
-            "id": 3,
-            "task": "Faire des choses divers et vari\u00e9s",
-            "check": false
-        },
-        {
-            "id": 4,
-            "task": "Faire quelque chose",
-            "check": true
-        }
-    ]
+    "items": []
 }

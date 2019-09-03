@@ -8,7 +8,12 @@
         $todolist = json_decode($tempData, true);       // Décode le contenu du fichier
 
         foreach ($newModifs as $element) {
-            $index = array_search($element['id'], array_column($todolist['items'], 'id'), false);
+            $sanitizedElement = filter_var_array($element, array(
+                'id'    => FILTER_SANITIZE_NUMBER_INT,
+                'check' => FILTER_VALIDATE_BOOLEAN
+            ));
+
+            $index = array_search($sanitizedElement['id'], array_column($todolist['items'], 'id'), false);
                                                 //? On utilisera "array_column" pour qu'il sélectionne bien la clé 'id'
 
             $check = $todolist['items'][$index]['check'];
