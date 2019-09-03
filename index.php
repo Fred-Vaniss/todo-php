@@ -56,10 +56,7 @@
             <input type="text" name="newtask" id="newtask">
             <button type="submit" id='submit'>Ajouter</button>
         </form>
-    </div>
-
-    <div class="wrapper">
-        <div id="response"></div>
+        <div id="message"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>

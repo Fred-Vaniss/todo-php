@@ -34,27 +34,37 @@ function addItem (e) {
 
     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-    req.send('data='+JSON.stringify(data)); // Envoie de la requête avec l'objet créé au dessus
+    req.send('data='+input.value); // Envoie de la requête avec l'objet créé au dessus
 
     // Quand le PHP à fini le traitement et renvoie la réponse...
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE) {
-            let doList = document.getElementById('dolist').getElementsByTagName('ul')[0] //La balise UL de la page
+            if (req.status == 200){
+                // Stockage et décodage de la réponse envoyé par form.php
+                let message = document.getElementById('message');
+                let response = JSON.parse(req.responseText);
 
-            // Stockage et décodage de la réponse envoyé par form.php
-            let response = JSON.parse(req.responseText);  
-            
-            // Création de l'élément li et ajout dans notre page 
-            let newItem = document.createElement('li')
-            newItem.dataset.id = response.id
-            newItem.className = 'todo-item  element-unchecked'
-            newItem.innerHTML = response.task
-            newItem.addEventListener('click', checkItem)
+                if (response.success){
+                    let doList = document.getElementById('dolist').getElementsByTagName('ul')[0] //La balise UL de la page       
+                    
+                    // Création de l'élément li et ajout dans notre page 
+                    let newItem = document.createElement('li');
+                    newItem.dataset.id = response.content.id;
+                    newItem.className = 'todo-item  element-unchecked';
+                    newItem.innerHTML = response.content.task;
+                    newItem.addEventListener('click', checkItem);
+        
+                    doList.appendChild(newItem);
+        
+                    // Vidage du champ de texte
+                    input.value = ''
+                    message.innerHTML = '';
+                } else {
+                    message.innerHTML = response.content
+                    message.style.color = 'red'
+                }
 
-            doList.appendChild(newItem)
-
-            // Vidage du champ de texte
-            input.value = ''
+            }
         }
     }
 }
@@ -100,8 +110,6 @@ function checkItem (e) {
             modifications.splice(found,1);
         }
     }
-
-    console.table(modifications)
 }
 
 // Ajout d'un élément
@@ -125,8 +133,6 @@ document.getElementById('save').addEventListener('click', () => {
     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     req.send('modifs='+JSON.stringify(modifications))
-
-    console.log("enregistrer")
 
     req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE){

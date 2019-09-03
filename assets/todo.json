@@ -1,5 +1,5 @@
 {
-    "increment": 6,
+    "increment": 5,
     "items": [
         {
             "id": 1,
@@ -19,11 +19,6 @@
         {
             "id": 4,
             "task": "Faire quelque chose",
-            "check": false
-        },
-        {
-            "id": 5,
-            "task": "Nouvel \u00e9l\u00e9ment",
             "check": true
         }
     ]
